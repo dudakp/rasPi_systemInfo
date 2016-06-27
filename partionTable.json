@@ -1,0 +1,79 @@
+{
+    "avail": [
+        "Avail", 
+        "3.3G", 
+        "214M", 
+        "218M", 
+        "213M", 
+        "5.0M", 
+        "218M", 
+        "43M", 
+        "44M"
+    ], 
+    "filesystem": [
+        "Filesystem", 
+        "/dev/root", 
+        "devtmpfs", 
+        "tmpfs", 
+        "tmpfs", 
+        "tmpfs", 
+        "tmpfs", 
+        "/dev/mmcblk0p1", 
+        "tmpfs"
+    ], 
+    "location": [
+        "Mounted", 
+        "/", 
+        "/dev", 
+        "/dev/shm", 
+        "/run", 
+        "/run/lock", 
+        "/sys/fs/cgroup", 
+        "/boot", 
+        "/run/user/1000"
+    ], 
+    "size": [
+        "Size", 
+        "7.2G", 
+        "214M", 
+        "218M", 
+        "218M", 
+        "5.0M", 
+        "218M", 
+        "63M", 
+        "44M"
+    ], 
+    "type": [
+        "Type", 
+        "ext4", 
+        "devtmpfs", 
+        "tmpfs", 
+        "tmpfs", 
+        "tmpfs", 
+        "tmpfs", 
+        "vfat", 
+        "tmpfs"
+    ], 
+    "used": [
+        "Used", 
+        "3.7G", 
+        "0", 
+        "0", 
+        "4.5M", 
+        "4.0K", 
+        "0", 
+        "21M", 
+        "0"
+    ], 
+    "usedP": [
+        "Use%", 
+        "53%", 
+        "0%", 
+        "0%", 
+        "3%", 
+        "1%", 
+        "0%", 
+        "33%", 
+        "0%"
+    ]
+}

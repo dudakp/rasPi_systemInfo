@@ -1,0 +1,17 @@
+{
+    "cpuLoad": "7.84", 
+    "cpuTemp": 44.4, 
+    "freeRam": 111, 
+    "homeFree": "3.3G", 
+    "homeTotal": "7.2G", 
+    "homeUsed": "3.7G", 
+    "ip": "192.168.10.131 ", 
+    "load5": 0.34, 
+    "rx_bytesPS": 0, 
+    "totalRam": 433, 
+    "totalSwap": 99, 
+    "tx_bytesPS": 0, 
+    "upTime": " 1:56", 
+    "usedRam": 322, 
+    "usedSwap": 0
+}
