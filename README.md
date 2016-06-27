@@ -8,9 +8,13 @@ Python library for collecting system info and data from some external sensors
 * Collect data from external sensors
 * Store collected data in JSON format, SQLite or mySQL database
 
+### Depencies ### 
+* vcgencmd
+
 ### Usage ###
 
-
+### Used libraries ###
+* https://github.com/randymxj/OpenPythonSensor
 
 ### Contact ###
 
