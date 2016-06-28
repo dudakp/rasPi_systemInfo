@@ -5,22 +5,26 @@ import time
 import json
 
 class SYS_INFO():
+	#return usege info of RAM in order - used RAM, free RAM, used SWAP, free SWAP
 	def get_ram(self):
 		try:
 			s = subprocess.check_output(["free","-m"])
 			lines = s.split('\n')
-			data =[int(lines[1].split()[2]), int(lines[1].split()[3]), int(lines[3].split()[1]), int(lines[3].split()[2])]
+			data =[int(lines[1].split()[2]), int(lines[1].split()[3]), int(lines[3].split()[2]), int(lines[3].split()[3])]
 			return data
-		except:
+		except TypeError as err:
+			print err
 			return None
-
+	#returns number od running processes
 	def get_process_count(self):
 		try:
 			s = subprocess.check_output(["ps","-e"])
 			return len(s.split('\n'))        
-		except:
+		except TypeError as err:
+			print err
 			return None
-	
+
+	#returns cpu load
 	def get_cpu_load(self):
 		try:
 			last_idle = last_total = 0
@@ -31,9 +35,11 @@ class SYS_INFO():
 			last_idle, last_total = idle, total
 			utilisation = 100.0 * (1.0 - idle_delta / total_delta)
 			return "%.2f" % utilisation
-		except:
+		except TypeError as err:
+			print err
 			return None
 
+	#returns uptime and average cpu load over 5 minutes
 	def get_up_stats(self):
 		try:
 			data = [None, None]
@@ -46,31 +52,37 @@ class SYS_INFO():
 			data[0] = up
 			data[1] = load_five
 			return data
-		except:
+		except TypeError as err:
+			print err
 			return None
-		
+
+	#returns current cpu remperature
 	def get_temperature(self):
 		try:
 			s = subprocess.check_output(["/opt/vc/bin/vcgencmd","measure_temp"])
 			return float(s.split('=')[1][:-3])
 		except:
 			return None
-		
-	def get_disk_info(self):
+	#returns info of home disk partion in order - filesystem, total size, used space, availible space, usage in %, mouting point
+	def get_home_partion_info(self):
 		try:
 			s = subprocess.check_output(['df', '-h', '-T'])
 			lines = s.split('\n')
-			par_home = filter(lambda x: 'ext4' in x, lines)
-			par_boot = filter(lambda x: 'vfat' in x, lines)
-			return [str(par_home), str(par_boot)]
-		except:
+			par_home = str(filter(lambda x: 'ext4' in x, lines)).split()
+			return par_home
+		except TypeError as err:
+			print err
 			return None
+
+	#returns full partion table in format - every element of list if line describing partion.
+	#example use is: partionTable = get_partion_info()[0.split() - returns list containing info of first disk partion
 	def get_partion_table(self):
 		try:
 			s = subprocess.check_output(['df', '-h', '-T'])
 			lines = s.split('\n')
 			return lines
-		except:
+		except TypeError as err:
+			print err
 			return None
 
 	#returns current speed in kB/s format: rx, tx, ip
@@ -91,9 +103,11 @@ class SYS_INFO():
 			ip = ip.split('\n')
 			sysInfo = [rx_kbytesPS, tx_kbytesPS, ip[0]]
 			return sysInfo
-		except:
+		except TypeError as err:
+			print err
 			return None
 
+	#generates json file containing basic system info
 	def generate_basicInfo_json(self, network_interface):
 		try:
 			cpuTemp = self.get_temperature()
@@ -123,8 +137,11 @@ class SYS_INFO():
 				data = json.dumps(data_json, indent=4, skipkeys=True, sort_keys=True)
 				outfile.write(data)
 				outfile.close()
-		except:
+		except TypeError as err:
+			print err
 			return None
+
+	#generates json file containing partion table
 	def generate_partionTable_json(self):
 		try:
 			table = self.get_partion_table()
@@ -156,5 +173,6 @@ class SYS_INFO():
 				data = json.dumps(data_json, indent=4, skipkeys=True, sort_keys=True)
 				outfile.write(data)
 				outfile.close()
-		except:
+		except TypeError as err:
+			print err
 			return None
