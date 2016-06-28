@@ -10,8 +10,8 @@ Python library for collecting system info and data from some external sensors
 
 ### Depencies ### 
 * vcgencmd
-
-### Usage ###
+* python-mysql.connector
+* python-sqlite
 
 ### Used libraries ###
 * https://github.com/randymxj/OpenPythonSensor
