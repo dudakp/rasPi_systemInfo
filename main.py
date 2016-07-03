@@ -8,12 +8,14 @@ from sysInfo import *
 
 #htu = HTU21D()
 info = SYS_INFO()
+log = DB_LOGGER()
 
 #print htu.readTemperatureData()
 CPU_load = info.get_cpu_load()
 used_RAM = str(info.get_ram()[0])
 uptime = info.get_up_stats()[0]
 rx_speed = str(info.get_network_stats("wlan2")[0])
+log.log_to_sqlite("test", "temp", '5')
 
 print "CPU load: "+ CPU_load
 print "Used RAM: "+ used_RAM

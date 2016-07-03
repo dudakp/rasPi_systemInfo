@@ -3,28 +3,21 @@
 import sys
 import sqlite3 as lite
 import time
-#import mysql.connector
-import datetime as dt
+import mysql.connector
 
 class DB_LOGGER():
 
+	#create table witgh predefined name (table_name) and logs given data(log_data - REAL) and current timestamp - TEXT
 	def log_to_sqlite(self, db_name, table_name, log_data,):
 		try:
 			con = lite.connect(db_name+'.db')
 			cur = con.cursor()
-			cur.execute("CREATE TABLE IF NOT EXISTS"+table_name+"(Value REAL, Time TEXT)")
+			cur.execute("CREATE TABLE IF NOT EXISTS "+table_name+"(Value REAL, Time TEXT)")
 			dt = time.asctime( time.localtime(time.time()) )
-			cur.execute("INSERT INTO TEMPLOG (Value, Time) VALUES(?,?,?)", (log_data, dt))
+			cur.execute("INSERT INTO " + table_name + " (Value, Time) VALUES(?,?)", (log_data, dt))
 			con.commit()
 		except lite.Error, e:
 			if con:
 				con.rollback()
 				print "Error %s:" % e.args[0]
 				sys.exit(1)
-
-	def log_to_mySQL(self, user, password, host, db_name):
-		try:
-			cnx = mysql.connector.connect(user=user, password=password, host=host, database=db_name)
-			print cnx
-		except mysql.connector.Error as err:
-			print err
